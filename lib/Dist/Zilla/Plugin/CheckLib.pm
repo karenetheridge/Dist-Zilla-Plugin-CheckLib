@@ -133,6 +133,8 @@ An additional path to search for headers. Can be used more than once.
 
 =head2 C<INC>
 
+=for stopwords incpaths
+
 A L<ExtUtils::MakeMaker>-style space-separated list of incpaths, each preceded by C<-I>.
 
 =head1 SUPPORT
