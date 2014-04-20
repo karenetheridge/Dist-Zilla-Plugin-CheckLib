@@ -60,7 +60,7 @@ sub setup_installer {
                     : ()
             } @list_options),
             (map {
-                $self->$_
+                defined $self->$_
                     ? [ $_ => '\'' . $self->$_ . '\'' ]
                     : ()
             } @string_options),
@@ -122,6 +122,12 @@ A L<ExtUtils::MakeMaker>-style space-separated list of libraries (each preceded 
 =head2 C<debug>
 
 If true, emit information during processing that can be used for debugging.
+B<Note>: as this is an arbitrary string that is inserted directly into
+F<Makefile.PL> or F<Build.PL>, this can be any arbitrary expression,
+for example:
+
+    [CheckLib]
+    debug = $ENV{AUTOMATED_TESTING} || $^O eq 'MSWin32'
 
 =head2 C<header>
 

@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+          - insertion of check_lib_or_exit arguments updated, so
+            defined-but-false values are not skipped
 
 0.001     2014-04-19 08:32:40Z
           - Initial release.

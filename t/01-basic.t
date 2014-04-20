@@ -17,7 +17,7 @@ my $tzil = Builder->from_config(
                         lib => [ qw(iconv jpeg) ],
                         header => 'jpeglib.h',
                         libpath => 'additional_path',
-                        debug => 1,
+                        debug => 0,
                         LIBS => '-lfoo -lbar -Lkablammo',
                         incpath => [ qw(inc1 inc2 inc3) ],
                     },
@@ -45,7 +45,7 @@ check_lib_or_exit(
     lib => [ 'iconv', 'jpeg' ],
     libpath => 'additional_path',
     LIBS => '-lfoo -lbar -Lkablammo',
-    debug => '1',
+    debug => '0',
 );
 
 PATTERN
