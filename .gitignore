@@ -1,6 +1,6 @@
 /.ackrc
 /.build/
-!.gitignore
+!/.gitignore
 /.latest
 /Dist-Zilla-Plugin-CheckLib-*/
 /Dist-Zilla-Plugin-CheckLib-*.tar.gz
