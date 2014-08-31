@@ -164,12 +164,9 @@ I am also usually active on irc, as 'ether' at C<irc.perl.org>.
 
 =head1 SEE ALSO
 
-=begin :list
-
+=for :list
 * L<Devel::CheckLib>
 * L<Devel::AssertOS> and L<Dist::Zilla::Plugin::AssertOS>
 * L<Devel::CheckBin> and L<Dist::Zilla::Plugin::CheckBin>
-
-=end :list
 
 =cut
