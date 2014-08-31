@@ -38,7 +38,7 @@ sub register_prereqs {
           phase => 'configure',
           type  => 'requires',
         },
-        'Devel::CheckLib' => '0',
+        'Devel::CheckLib' => '0.9',
     );
 }
 
