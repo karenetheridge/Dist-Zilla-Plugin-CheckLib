@@ -31,6 +31,19 @@ has \@string_options => (
     is => 'ro', isa => 'Str',
 );
 
+around dump_config => sub
+{
+    my ($orig, $self) = @_;
+    my $config = $self->$orig;
+
+    $config->{+__PACKAGE__} = {
+        ( map { $_ => [ $self->$_ ] } @list_options ),
+        ( map { $_ => $self->$_ } @string_options ),
+    };
+
+    return $config;
+};
+
 sub register_prereqs {
     my $self = shift;
     $self->zilla->register_prereqs(

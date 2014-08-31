@@ -14,6 +14,7 @@ my $tzil = Builder->from_config(
         add_files => {
             path(qw(source dist.ini)) => simple_ini(
                 [ GatherDir => ],
+                [ MetaConfig => ],
                 [ 'MakeMaker' => ],
                 [ 'CheckLib' => {
                         lib => [ qw(iconv jpeg) ],
@@ -75,11 +76,31 @@ cmp_deeply(
             configure => {
                 requires => {
                     'Devel::CheckLib' => '0.9',
-                    'ExtUtils::MakeMaker' => ignore,    # populated by [MakeMaker],
+                    'ExtUtils::MakeMaker' => ignore,    # populated by InstallerTool
                 },
             },
             # build => ignore, # if using ModuleBuild
         },
+        x_Dist_Zilla => superhashof({
+            plugins => supersetof(
+                {
+                    class => 'Dist::Zilla::Plugin::CheckLib',
+                    config => {
+                        'Dist::Zilla::Plugin::CheckLib' => superhashof({
+                            header => ['jpeglib.h'],
+                            incpath => ['inc1', 'inc2', 'inc3'],
+                            lib => [ 'iconv', 'jpeg' ],
+                            libpath => [ 'additional_path' ],
+                            INC => undef,
+                            LIBS => '-lfoo -lbar -Lkablammo',
+                            debug => '0',
+                        }),
+                    },
+                    name => 'CheckLib',
+                    version => ignore,
+                },
+            ),
+        }),
     }),
     'prereqs are properly injected for the configure phase',
 ) or diag 'got distmeta: ', explain $tzil->distmeta;
