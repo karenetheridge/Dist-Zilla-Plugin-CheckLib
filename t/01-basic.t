@@ -5,6 +5,7 @@ use Test::More;
 use if $ENV{AUTHOR_TESTING}, 'Test::Warnings';
 use Test::DZil;
 use Path::Tiny;
+use Test::Fatal;
 
 my $tzil = Builder->from_config(
     { dist_root => 't/does-not-exist' },
@@ -28,7 +29,11 @@ my $tzil = Builder->from_config(
     },
 );
 
-$tzil->build;
+is(
+    exception { $tzil->build },
+    undef,
+    'nothing exploded',
+);
 
 my $build_dir = path($tzil->tempdir)->child('build');
 my $file = $build_dir->child('Makefile.PL');
@@ -38,6 +43,9 @@ my $content = $file->slurp_utf8;
 unlike($content, qr/[^\S\n]\n/m, 'no trailing whitespace in generated file');
 
 my $pattern = <<PATTERN;
+use strict;
+use warnings;
+
 use Devel::CheckLib;
 check_lib_or_exit(
     header => 'jpeglib.h',

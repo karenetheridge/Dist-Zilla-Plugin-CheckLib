@@ -1,7 +1,7 @@
 use strict;
 use warnings FATAL => 'all';
 
-use Test::Requires 'Dist::Zilla::Plugin::ModuleBuildTiny';
+use Test::Requires { 'Dist::Zilla::Plugin::ModuleBuildTiny' => '0.007' };
 
 use Path::Tiny;
 my $code = path('t', '01-basic.t')->slurp_utf8;

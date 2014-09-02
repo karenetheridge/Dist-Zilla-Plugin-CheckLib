@@ -51,6 +51,12 @@ sub setup_installer {
 
     for my $mfpl (@mfpl)
     {
+        my $orig_content = $mfpl->content;
+        $self->log_fatal('could not find position in ' . $mfpl->name . ' to modify!')
+            if not $orig_content =~ m/use strict;\nuse warnings;\n\n/g;
+
+        my $pos = pos($orig_content);
+
         # build a list of tuples: field name => string
         my @options = (
             (map {
@@ -66,13 +72,16 @@ sub setup_installer {
             } @string_options),
         );
 
-        my $content = "use Devel::CheckLib;\n"
+        $mfpl->content(
+            substr($orig_content, 0, $pos)
+            . "use Devel::CheckLib;\n"
             . "check_lib_or_exit(\n"
             . join('',
                     map { '    ' . $_->[0] . ' => ' . $_->[1] . ",\n" } @options
                 )
-            . ");\n\n";
-        $mfpl->content($content . $mfpl->content);
+            . ");\n\n"
+            . substr($orig_content, $pos)
+        );
     }
     return;
 }
