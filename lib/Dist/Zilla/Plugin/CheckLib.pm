@@ -8,6 +8,7 @@ use Moose;
 with 'Dist::Zilla::Role::InstallTool',
     'Dist::Zilla::Role::PrereqSource',
 ;
+use Scalar::Util 'blessed';
 use namespace::autoclean;
 
 my @list_options = qw(header incpath lib libpath);
@@ -74,6 +75,7 @@ sub setup_installer {
 
         $mfpl->content(
             substr($orig_content, 0, $pos)
+            . "# inserted by " . blessed($self) . ' ' . ($self->VERSION || '<self>') . "\n"
             . "use Devel::CheckLib;\n"
             . "check_lib_or_exit(\n"
             . join('',

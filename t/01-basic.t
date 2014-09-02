@@ -42,10 +42,13 @@ ok(-e $file, 'Makefile.PL created');
 my $content = $file->slurp_utf8;
 unlike($content, qr/[^\S\n]\n/m, 'no trailing whitespace in generated file');
 
+my $version = Dist::Zilla::Plugin::CheckLib->VERSION || '<self>';
+
 my $pattern = <<PATTERN;
 use strict;
 use warnings;
 
+# inserted by Dist::Zilla::Plugin::CheckLib $version
 use Devel::CheckLib;
 check_lib_or_exit(
     header => 'jpeglib.h',
