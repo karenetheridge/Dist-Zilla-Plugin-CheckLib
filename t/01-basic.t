@@ -12,7 +12,7 @@ my $tzil = Builder->from_config(
         add_files => {
             path(qw(source dist.ini)) => simple_ini(
                 [ GatherDir => ],
-                [ MakeMaker => ],
+                [ 'MakeMaker' => ],
                 [ 'CheckLib' => {
                         lib => [ qw(iconv jpeg) ],
                         header => 'jpeglib.h',
@@ -47,7 +47,6 @@ check_lib_or_exit(
     LIBS => '-lfoo -lbar -Lkablammo',
     debug => '0',
 );
-
 PATTERN
 
 like(
