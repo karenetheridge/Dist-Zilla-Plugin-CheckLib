@@ -8,6 +8,8 @@ Revision history for {{$dist->name}}
           - Makefile.PL/Build.PL content inserted a little lower in the file
           - bump the required version of Devel::CheckLib, to work around an
             issue in perl 5.18 or later
+          - now munging the file at the proper phase, if the plugin generating
+            the file also does so
 
 0.001     2014-04-19 08:32:40Z
           - Initial release.
