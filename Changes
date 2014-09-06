@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.003     2014-09-06 02:31:19Z
           - now also testing interaction with [MakeMaker::Fallback],
             [ModuleBuildTiny::Fallback] -- the latter requiring fixes
 
