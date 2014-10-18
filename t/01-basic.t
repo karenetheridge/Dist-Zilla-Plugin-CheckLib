@@ -79,7 +79,7 @@ cmp_deeply(
                     'ExtUtils::MakeMaker' => ignore,    # populated by [MakeMaker]
                 },
             },
-            # build => ignore, # if using ModuleBuild
+            # build prereqs go here
         },
         x_Dist_Zilla => superhashof({
             plugins => supersetof(
