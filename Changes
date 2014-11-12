@@ -3,6 +3,7 @@ Revision history for {{$dist->name}}
 {{$NEXT}}
           - fix optional tests of interaction with [MakeMaker::Fallback] that
             broke with its newest release
+          - avoid testing with [MakeMaker::Awesome] if its version is too old
 
 0.005     2014-11-11 06:54:15Z
           - fix optional tests of interaction with [ModuleBuildTiny::Fallback]
