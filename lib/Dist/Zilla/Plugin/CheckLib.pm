@@ -68,7 +68,7 @@ sub munge_files
     my @mfpl = grep { $_->name eq 'Makefile.PL' or $_->name eq 'Build.PL' } @{ $self->zilla->files };
     for my $mfpl (@mfpl)
     {
-        $self->log_debug('munging ' . $mfpl->name . ' in file gatherer phase');
+        $self->log_debug([ 'munging %s in file gatherer phase', $mfpl->name ]);
         $files{$mfpl->name} = $mfpl;
         $self->_munge_file($mfpl);
     }
@@ -88,7 +88,7 @@ sub setup_installer
     for my $mfpl (@mfpl)
     {
         next if exists $files{$mfpl->name};
-        $self->log_debug('munging ' . $mfpl->name . ' in setup_installer phase');
+        $self->log_debug([ 'munging %s in setup_installer phase', $mfpl->name ]);
         $self->_munge_file($mfpl);
     }
     return;
@@ -99,7 +99,7 @@ sub _munge_file
     my ($self, $file) = @_;
 
     my $orig_content = $file->content;
-    $self->log_fatal('could not find position in ' . $file->name . ' to modify!')
+    $self->log_fatal([ 'could not find position in %s to modify!', $file->name ])
         if not $orig_content =~ m/use strict;\nuse warnings;\n\n/g;
 
     my $pos = pos($orig_content);
