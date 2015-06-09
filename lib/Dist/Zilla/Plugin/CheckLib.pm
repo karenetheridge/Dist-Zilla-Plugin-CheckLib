@@ -24,7 +24,7 @@ has $_ => (
     lazy => 1,
     default => sub { [] },
     traits => ['Array'],
-    handles => { $_ => 'elements' },
+    handles => { $_ => 'sort' },
 ) foreach @list_options;
 
 my @string_options = qw(INC LIBS debug);
