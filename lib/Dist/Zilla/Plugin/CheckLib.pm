@@ -5,6 +5,8 @@ package Dist::Zilla::Plugin::CheckLib;
 # KEYWORDS: distribution installation require compiler library header resource
 # vim: set ts=8 sw=4 tw=78 et :
 
+our $VERSION = '0.007';
+
 use Moose;
 with
     'Dist::Zilla::Role::FileMunger',
@@ -119,7 +121,7 @@ sub _munge_file
 
     $file->content(
         substr($orig_content, 0, $pos)
-        . "# inserted by " . blessed($self) . ' ' . ($self->VERSION || '<self>') . "\n"
+        . "# inserted by " . blessed($self) . ' ' . $self->VERSION . "\n"
         . "use Devel::CheckLib;\n"
         . "check_lib_or_exit(\n"
         . join('',
