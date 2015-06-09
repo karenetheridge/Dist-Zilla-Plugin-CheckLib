@@ -19,16 +19,13 @@ use namespace::autoclean;
 my @list_options = qw(header incpath lib libpath);
 sub mvp_multivalue_args { @list_options }
 
-foreach my $option (@list_options)
-{
-    has $option => (
-        isa => 'ArrayRef[Str]',
-        lazy => 1,
-        default => sub { [] },
-        traits => ['Array'],
-        handles => { $option => 'elements' },
-    );
-}
+has $_ => (
+    isa => 'ArrayRef[Str]',
+    lazy => 1,
+    default => sub { [] },
+    traits => ['Array'],
+    handles => { $_ => 'elements' },
+) foreach @list_options;
 
 my @string_options = qw(INC LIBS debug);
 has \@string_options => (
