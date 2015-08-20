@@ -40,6 +40,7 @@ around dump_config => sub
     $config->{+__PACKAGE__} = {
         ( map { $_ => [ $self->$_ ] } @list_options ),
         ( map { $_ => $self->$_ } @string_options ),
+        blessed($self) ne __PACKAGE__ ? ( version => $VERSION ) : (),
     };
 
     return $config;
