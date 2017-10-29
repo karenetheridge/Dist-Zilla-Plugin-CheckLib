@@ -1,5 +1,7 @@
 Revision history for Dist-Zilla-Plugin-CheckLib
 
+{{$NEXT}}
+
 0.007     2017-10-29 01:55:41Z
           - sort data in dumped configs, for consistency between builds
           - fix test for latest [MakeMaker::Fallback], which has slight

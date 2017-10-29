@@ -5,7 +5,7 @@ package Dist::Zilla::Plugin::CheckLib;
 # ABSTRACT: Require that your distribution has a particular library available
 # KEYWORDS: distribution installation require compiler library header resource
 
-our $VERSION = '0.007';
+our $VERSION = '0.008';
 
 use Moose;
 with
