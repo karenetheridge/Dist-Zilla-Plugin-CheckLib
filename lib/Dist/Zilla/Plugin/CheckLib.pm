@@ -38,8 +38,8 @@ around dump_config => sub
     my $config = $self->$orig;
 
     $config->{+__PACKAGE__} = {
-        ( map { $_ => [ $self->$_ ] } @list_options ),
-        ( map { $_ => $self->$_ } @string_options ),
+        ( map +($_ => [ $self->$_ ]), @list_options ),
+        ( map +($_ => $self->$_), @string_options ),
         blessed($self) ne __PACKAGE__ ? ( version => $VERSION ) : (),
     };
 
@@ -63,7 +63,7 @@ sub munge_files
 {
     my $self = shift;
 
-    my @mfpl = grep { $_->name eq 'Makefile.PL' or $_->name eq 'Build.PL' } @{ $self->zilla->files };
+    my @mfpl = grep +($_->name eq 'Makefile.PL' or $_->name eq 'Build.PL'), @{ $self->zilla->files };
     for my $mfpl (@mfpl)
     {
         $self->log_debug([ 'munging %s in file gatherer phase', $mfpl->name ]);
@@ -79,7 +79,7 @@ sub setup_installer
 {
     my $self = shift;
 
-    my @mfpl = grep { $_->name eq 'Makefile.PL' or $_->name eq 'Build.PL' } @{ $self->zilla->files };
+    my @mfpl = grep +($_->name eq 'Makefile.PL' or $_->name eq 'Build.PL'), @{ $self->zilla->files };
 
     $self->log_fatal('No Makefile.PL or Build.PL was found. [CheckLib] should appear in dist.ini after [MakeMaker] or variant!') unless @mfpl;
 
@@ -105,7 +105,7 @@ sub _munge_file
     # build a list of tuples: field name => string
     my @options = (
         (map {
-            my @stuff = map { '\'' . $_ . '\'' } $self->$_;
+            my @stuff = map '\''.$_.'\'', $self->$_;
             @stuff
                 ? [ $_ => @stuff > 1 ? ('[ ' . join(', ', @stuff) . ' ]') : $stuff[0] ]
                 : ()
@@ -123,7 +123,7 @@ sub _munge_file
         . "use Devel::CheckLib;\n"
         . "check_lib_or_exit(\n"
         . join('',
-                map { '    ' . $_->[0] . ' => ' . $_->[1] . ",\n" } @options
+                map '    '.$_->[0].' => '.$_->[1].",\n", @options
             )
         . ");\n\n"
         . substr($orig_content, $pos)
